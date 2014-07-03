@@ -23,7 +23,7 @@ exports.clock = function(req, res, next) {
 	   newpix = date.getHours() + date.getDate() * 24 + 2450;
 	newpix += date.getMinutes() / 60.0;
 	newpix += date.getSeconds() / 3600.0;
-	newpix = round(newpix, 2);
+	newpix = Math.round(newpix, 2);
 	
     var countdownh = date.getHours() + date.getDate() * 24;
 	countdownh = 669 - countdownh;
