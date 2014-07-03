@@ -169,9 +169,9 @@ function makeClockHand(img, offsetx, offsety, angle, length, thick) {
         y3 = offsety + -length * 0.36 * Math.sin(angle);
 
     img.setThickness(Math.floor(thick * 0.333));
-    img.line(img, offsetx, offsety, x, y, black);
+    img.line(img, Math.floor(offsetx), Math.floor(offsety), Math.floor(x), Math.floor(y), black);
     img.setThickness(Math.floor(thick * 0.667));
-    img.line(img, offsetx, offsety, x2, y2, black);
+    img.line(img, Math.floor(offsetx), Math.floor(offsety), Math.floor(x2), Math.floor(y2), black);
     //img.linethick(img, offsetx, offsety, x3, y3, black, thick);
 }
 
