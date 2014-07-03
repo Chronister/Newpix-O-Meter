@@ -100,7 +100,7 @@ exports.clock = function(req, res, next) {
 	gear2.copyMerge(img, 77 - offset2, 40 - offset2, 0, 0, gear2.width, gear2.height, 100);
 	gear3.copyMerge(img, 8 - offset3, 45 - offset3, 0, 0, gear3.width, gear3.height, 100);
 	
-	clock.copymerge(img, 0, 0, 0, 0, 100, 100, 100);
+	clock.copyMerge(img, 0, 0, 0, 0, 100, 100, 100);
 	
 	for (i = 0; i < 50; i++) {
 		x1 = 50 + 30 * Math.cos(((i / 50) * 2 * Math.PI + (Math.PI * 0.5)));
