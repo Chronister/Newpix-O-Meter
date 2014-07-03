@@ -22,11 +22,11 @@ exports.clock = function(req, res, next) {
 
 	var font = path.join(fonts, 'CASTELAR.TTF');
 	
-    var gear1 =    gd.createfrompng("gear1.png"),
-	   gear2 =     gd.createfrompng("gear2.png"),
-	   gear3 =     gd.createfrompng("gear3.png"),
-	   clock =     gd.createfrompng("clock5.png"),
-	   img =       gd.createfrompng("clock5.png");
+    var gear1 =    gd.createFromPng(path.join(images, "gear1.png")),
+	   gear2 =     gd.createFromPng(path.join(images, "gear2.png")),
+	   gear3 =     gd.createFromPng(path.join(images, "gear3.png")),
+	   clock =     gd.createFromPng(path.join(images, "clock5.png")),
+	   img =       gd.createFromPng(path.join(images, "clock5.png"));
     
     var width = img.width;
 	
