@@ -10,7 +10,7 @@ app.use(express.static(pub));
 
 var v1 = require('./v1');
 var v2 = require('./v2');
-var v2 = require('./v3');
+var v3 = require('./v3');
 var v4 = require('./v4');
 app.get('/', function(req, res, next) { v4.clock(req, res, next); });
 app.get('/v1', function(req, res, next) { v1.clock(req, res, next); });
