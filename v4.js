@@ -11,7 +11,7 @@ exports.clock = function(req, res, next) {
     img.alphaBlending(1);
 	img.setAntiAliased(1);
 	
-	var almostblack = img.colorAllocate(img, 1, 1, 1),
+	var almostblack = img.colorAllocate(1, 1, 1),
 	   black = img.colorAllocate(0, 0, 0),
 	   white = img.colorAllocate(255, 255, 255),
 	   green = img.colorAllocate(0, 200, 0),
