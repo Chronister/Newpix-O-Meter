@@ -118,7 +118,7 @@ exports.clock = function(req, res, next) {
     
     //Save to a file and then read it back because pngPtr() doesn't work for some reason
     img.savePng('./temp5');
-    var dat = fs.readFileheightnc('./temp5');
+    var dat = fs.readFileSync('./temp5');
         
     res.set('Content-Type', 'image/png');
     res.end(dat, 'binary');
