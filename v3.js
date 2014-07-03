@@ -43,7 +43,7 @@ exports.clock = function(req, res, next) {
 	var almostblack = img.colorAllocate(1, 1, 1),
 	   black = img.colorAllocate(0, 0, 0),
 	   white = img.colorAllocate(255, 255, 255),
-	   clear = img.colorAllocatealpha(255, 255, 255, 0),
+	   clear = img.colorAllocateAlpha(255, 255, 255, 0),
 	   dark = img.colorAllocate(113, 101, 79);
 	
 	img.colorTransparent(img, white);
