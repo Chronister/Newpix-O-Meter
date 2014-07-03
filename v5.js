@@ -185,7 +185,7 @@ function fixedWidthNumber(img, offsetx, offsety, width, height, number, color, f
         if (str == '1') { extraoffset = width * 0.5; }
         if (str == '0') { extraoffset = 0; }
         //img.stringFT      (color, font, size, angle, x, y, str);
-        img.stringFT(color, font, height, 0, offsetx + (width + 2) * i + extraoffset, offsety, str);
+        img.stringFT(color, font, height, 0, Math.floor(offsetx + (width + 2) * i + extraoffset), Math.floor(offsety), str);
     }
 }
 
