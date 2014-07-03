@@ -60,13 +60,13 @@ exports.clock = function(req, res, next) {
     
     var gear1_diag = 2 * Math.sqrt(Math.pow(0.5 * gear1.width, 2) + Math.pow(0.5 * gear1.height, 2)),
         gear1_ang = ((minute + hour * 60) * 30),
-        gear1_rot = gd.createTrueColor(gear1_diag, gear1_diag),
+        gear1_rot = gd.createTrueColor(Math.floor(gear1_diag), Math.floor(gear1_diag)),
         gear2_diag = 2 * Math.sqrt(Math.pow(0.5 * gear2.width, 2) + Math.pow(0.5 * gear2.height, 2)),
         gear2_ang = -(minute * 60),
-        gear2_rot = gd.createTrueColor(gear2_diag, gear2_diag),
+        gear2_rot = gd.createTrueColor(Math.floor(gear2_diag), Math.floor(gear2_diag)),
         gear3_diag = 2 * Math.sqrt(Math.pow(0.5 * gear3.width, 2) + Math.pow(0.5 * gear3.height, 2)),
         gear3_ang = (minute * 120),
-        gear3_rot = gd.createTrueColor(gear3_diag, gear3_diag);
+        gear3_rot = gd.createTrueColor(Math.floor(gear3_diag), Math.floor(gear3_diag));
     
     //img.copyRotated(dest, dstX, dstY, srcX, srcY, srcW, srcH, angle);
 	gear1.copyRotated(gear1_rot, 
