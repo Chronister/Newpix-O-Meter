@@ -153,7 +153,7 @@ function makeClockFace(img, offsetx, offsety, radius, length1, length2, color, n
     }
     else { 
         img.setThickness(thick2*2);
-        img.line(img, Math.floor(offsetx), Math.floor(offsety - radius), Math.floor(offset)x, Math.floor(offsety - (radius - length2 * 1.6)), black);
+        img.line(img, Math.floor(offsetx), Math.floor(offsety - radius), Math.floor(offsetx), Math.floor(offsety - (radius - length2 * 1.6)), black);
     }
 }
 
