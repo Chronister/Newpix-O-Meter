@@ -19,13 +19,13 @@ exports.clock = function(req, res, next) {
     
 	img.fill(0, 0, black);
 	
-	var newpix = date.getHours() + date.getDate() * 24 + 2450;
+    var date = new Date(),
+	   newpix = date.getHours() + date.getDate() * 24 + 2450;
 	newpix += date.getMinutes() / 60.0;
 	newpix += date.getSeconds() / 3600.0;
 	newpix = round(newpix, 2);
 	
-    var date = new Date(),
-	   countdownh = date.getHours() + date.getDate() * 24;
+    var countdownh = date.getHours() + date.getDate() * 24;
 	countdownh = 669 - countdownh;
 	var countdownm = 60 - date.getMinutes();
 	if (countdownm < 10) { countdownm = "0" + countdownm; }
