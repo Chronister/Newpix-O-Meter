@@ -108,7 +108,7 @@ exports.clock = function(req, res, next) {
 		x2 = 50 + 33 * Math.cos(((i / 50) * 2 * Math.PI + (Math.PI * 0.5)));
 		y2 = 51 + 33 * Math.sin(((i / 50) * 2 * Math.PI + (Math.PI * 0.5)));
 	
-	imagelinethick(img, x1, y1, x2, y2, dark, 0.1);
+	img.line(x1, y1, x2, y2, dark, 1);
 	}
 	
 	for (i = 0; i < 10; i++) {
@@ -116,10 +116,11 @@ exports.clock = function(req, res, next) {
 		y1 = 51 + 28 * Math.sin(((i / 10) * 2 * Math.PI + (Math.PI * 0.5)));
 		x2 = 50 + 33 * Math.cos(((i / 10) * 2 * Math.PI + (Math.PI * 0.5)));
 		y2 = 51 + 33 * Math.sin(((i / 10) * 2 * Math.PI + (Math.PI * 0.5)));
-	
-	imagelinethick(img, x1, y1, x2, y2, black, 2);
+	img.setThickness(2);
+	img.line(x1, y1, x2, y2, black, 2);
 	}
-	imagelinethick(img, 50, 18, 50, 33, black, 2);
+    img.setThickness(2);
+	img.line(50, 18, 50, 33, black, 2);
 	
 	x = 50 + -25 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2);
 	y = 52 + -25 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2);
