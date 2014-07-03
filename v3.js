@@ -75,25 +75,25 @@ exports.clock = function(req, res, next) {
         0, 0,
         gear1.width,
         gear1.height,
-        gear1_ang);
+        Math.floor(gear1_ang));
 	gear2.copyRotated(gear2_rot, 
         (gear2_diag - gear2.width) / 2, 
         (gear2_diag - gear2.height) / 2, 
         0, 0,
         gear2.width,
         gear2.height,
-        gear2_ang);
+        Math.floor(gear2_ang));
     gear3.copyRotated(gear3_rot, 
         (gear3_diag - gear3.width) / 2, 
         (gear3_diag - gear3.height) / 2, 
         0, 0,
         gear3.width,
         gear3.height,
-        gear3_ang);
+        Math.floor(gear3_ang));
 	
-	offset1 = (gear1_rot.width - gear1.width) / 2;
-	offset2 = (gear2_rot.width - gear2.width) / 2;
-	offset3 = (gear3_rot.width - gear3.width) / 2;
+	offset1 = Math.floor((gear1_rot.width - gear1.width) / 2);
+	offset2 = Math.floor((gear2_rot.width - gear2.width) / 2);
+	offset3 = Math.floor((gear3_rot.width - gear3.width) / 2);
 	
     //img.copyMerge(dest, dstX, dstY, srcX, srcY, width, height, pct);
 	gear1.copyMerge(img, 54 - offset1, 7 - offset1, 0, 0, gear1.width, gear1.height, 100);
