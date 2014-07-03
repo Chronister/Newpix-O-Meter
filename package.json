@@ -1,0 +1,38 @@
+{
+  "name": "Newpix-O-Meter",
+  "version": "4.0.0",
+  "author": "Andrew Chronister <andrewLchronister@gmail.com>",
+  "description": "Newpix clock for the One True Thread",
+  "homepage": "http://chronoscreations.net/",
+  "license":"MIT",
+  "repository" : {
+    "type"  : "git",
+    "url"   : "https://github.com/Chronister/Newpix-O-Meter.git"
+  },
+  "contributors": [ 
+    {
+      "name": "Andrew Chronister",
+      "email": "andrewLchronister@gmail.com"
+    }
+  ],
+  "scripts": {
+    "start": "node ./index",
+    "predeploy": "echo This will be run before deploying the app",
+    "postdeploy": "echo This will be run after deploying the app"
+  },
+  "main": "./index",
+  "keywords": [
+    "clock",
+    "http",
+    "gd",
+    "server"
+  ],
+  "dependencies" : {
+    "express"        : "*",
+	"node-gd"        : "*"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.6"
+  }
+}
