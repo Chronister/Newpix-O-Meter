@@ -39,5 +39,5 @@ app.use(function(req, res, next){
   res.type('txt').send('Not found');
 });
 
-app.listen(3100);
-console.log('Newpix-O-Meter started on port 3100. Node version: ' + process.version);
+app.listen(80);
+console.log('Newpix-O-Meter started on port 80. Node version: ' + process.version);
