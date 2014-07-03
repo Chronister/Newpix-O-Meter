@@ -14,6 +14,7 @@ var v2 = require('./v3');
 var v4 = require('./v4');
 app.get('/', function(req, res, next) { v4.clock(req, res, next); });
 app.get('/v1', function(req, res, next) { v1.clock(req, res, next); });
+app.get('/v2', function(req, res, next) { v2.clock(req, res, next); });
 app.get('/v3', function(req, res, next) { v3.clock(req, res, next); });
 app.get('/v4', function(req, res, next) { v4.clock(req, res, next); });
 
