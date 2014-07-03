@@ -135,7 +135,7 @@ function makeClockFace(img, offsetx, offsety, radius, length1, length2, color, n
         x2 = offsetx + radius * Math.cos(((i / num1) * 2 * M_PI + H_PI));
         y2 = offsety + radius * Math.sin(((i / num1) * 2 * M_PI + H_PI));
 
-        img.line(Math.Floor(x1), Math.Floor(y1), Math.Floor(x2), Math.Floor(y2), color);
+        img.line(Math.floor(x1), Math.floor(y1), Math.floor(x2), Math.floor(y2), color);
     }
 
     for (var i = 0; i < num2; i++) {
@@ -145,7 +145,7 @@ function makeClockFace(img, offsetx, offsety, radius, length1, length2, color, n
         y2 = offsety + radius * Math.sin(((i / num2) * 2 * M_PI + (num2 == 10 ? H_PI : 0)));
         
         img.setThickness(thick2);
-        img.line(Math.Floor(x1), Math.Floor(y1), Math.Floor(x2), Math.Floor(y2), black);
+        img.line(Math.floor(x1), Math.floor(y1), Math.floor(x2), Math.floor(y2), black);
     }
     if (length2 <= 5) { 
         img.setThickness(thick2*2);
