@@ -38,7 +38,7 @@ exports.clock = function(req, res, next) {
 	   img = gd.createFromPng(path.join(images, 'clock3.png'));
 	
 	img.alphaBlending(1);
-	img.antiAlias(1);
+	img.setAntiAliased(1);
 	
 	var almostblack = img.colorallocate(1, 1, 1),
 	   black = img.colorallocate(0, 0, 0),
