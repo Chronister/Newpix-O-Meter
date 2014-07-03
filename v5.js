@@ -145,11 +145,4 @@ exports.clock = function(req, res, next) {
     res.set('Content-Type', 'image/png');
     res.end(dat, 'binary');
     img.destroy();
-    gear1.destroy();
-    gear1_rot.destroy();
-    gear2.destroy();
-    gear2_rot.destroy();
-    gear3.destroy();
-    gear3_rot.destroy();
-    clock.destroy();
 }
