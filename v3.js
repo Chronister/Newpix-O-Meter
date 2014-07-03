@@ -117,10 +117,10 @@ exports.clock = function(req, res, next) {
 		x2 = Math.floor(50 + 33 * Math.cos(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
 		y2 = Math.floor(51 + 33 * Math.sin(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
 	img.setThickness(2);
-	img.line(x1, y1, x2, y2, black, 2);
+	img.line(x1, y1, x2, y2, black);
 	}
     img.setThickness(2);
-	img.line(50, 18, 50, 33, black, 2);
+	img.line(50, 18, 50, 33, black);
 	
 	x = Math.floor(50 + -25 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
 	y = Math.floor(52 + -25 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
@@ -130,10 +130,13 @@ exports.clock = function(req, res, next) {
 	
 	x3 = Math.floor(50 + -9 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
 	y3 = Math.floor(52 + -9 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
-		
-	imagelinethick(img, 50, 52 , x, y, black, 2);
-	imagelinethick(img, 50, 52 , x2, y2, black, 3);
-	imagelinethick(img, 50, 52 , x3, y3, black, 4);
+
+    img.setThickness(2);
+	img.line(50, 52 , x, y, black);
+    img.setThickness(3);
+	img.line(50, 52 , x2, y2, black);
+    img.setThickness(4);
+	img.line(50, 52 , x3, y3, black);
     
     //Save to a file and then read it back because pngPtr() doesn't work for some reason
     img.savePng('./temp2');
