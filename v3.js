@@ -40,11 +40,11 @@ exports.clock = function(req, res, next) {
 	img.alphaBlending(1);
 	img.setAntiAliased(1);
 	
-	var almostblack = img.colorallocate(1, 1, 1),
-	   black = img.colorallocate(0, 0, 0),
-	   white = img.colorallocate(255, 255, 255),
-	   clear = img.colorallocatealpha(255, 255, 255, 0),
-	   dark = img.colorallocate(113, 101, 79);
+	var almostblack = img.colorAllocate(1, 1, 1),
+	   black = img.colorAllocate(0, 0, 0),
+	   white = img.colorAllocate(255, 255, 255),
+	   clear = img.colorAllocatealpha(255, 255, 255, 0),
+	   dark = img.colorAllocate(113, 101, 79);
 	
 	img.colorTransparent(img, white);
 	clock.colorTransparent(clock, white);
