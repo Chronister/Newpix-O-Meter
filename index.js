@@ -12,11 +12,13 @@ var v1 = require('./v1');
 var v2 = require('./v2');
 var v3 = require('./v3');
 var v4 = require('./v4');
+var v5 = require('./v5');
 app.get('/', function(req, res, next) { v3.clock(req, res, next); });
 app.get('/v1', function(req, res, next) { v1.clock(req, res, next); });
 app.get('/v2', function(req, res, next) { v2.clock(req, res, next); });
 app.get('/v3', function(req, res, next) { v3.clock(req, res, next); });
 app.get('/v4', function(req, res, next) { v4.clock(req, res, next); });
+app.get('/v5', function(req, res, next) { v5.clock(req, res, next); });
 
 // change this to a better error handler in your code
 // sending stacktrace to users in production is not good
