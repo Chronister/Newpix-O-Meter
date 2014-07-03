@@ -2,19 +2,41 @@
 var gd = require('node-gd');
 var fs = require('fs');
 
+var fonts = './font/';
+
 exports.clock = function(req, res, next) {
-    var img = gd.createTrueColor(100, 100);
-    img.setAntiAliased(1);
+    var img = gd.createTrueColor(800, 100);
+    var font = font = 'DigitalDream.ttf';
     
-    var almostblack = img.colorAllocate(1, 1, 1),
+    img.alphaBlending(1);
+	img.setAntiAliased(1);
+	
+	var almostblack = img.colorAllocate(img, 1, 1, 1),
 	   black = img.colorAllocate(0, 0, 0),
 	   white = img.colorAllocate(255, 255, 255),
+	   green = img.colorAllocate(0, 200, 0),
 	   clear = img.colorAllocateAlpha(255, 255, 255, 0);
     
-    img.colorTransparent(almostblack);
-	img.fill(0, 0, white);
-	img.filledEllipse(50, 50, 98, 98, black);
-	img.filledEllipse(50, 50, 94, 94, white);
+	img.fill(0, 0, black);
+	
+	var newpix = date.getHours() + date.getDate() * 24 + 2450;
+	newpix += date.getMinutes() / 60.0;
+	newpix += date.getSeconds() / 3600.0;
+	newpix = round(newpix, 2);
+	
+    var date = new Date(),
+	   countdownh = date.getHours() + date.getDate() * 24;
+	countdownh = 669 - countdownh;
+	var countdownm = 60 - date.getMinutes();
+	if (countdownm < 10) { countdownm = "0" + countdownm; }
+	if (countdownh < 10) { countdownh = "0" + countdownh; }
+	
+    //img.stringFTBBox  (color, font, size, angle, x, y, str);
+    //img.stringFT      (color, font, size, angle, x, y, str);
+	img.stringFT(green, font, 20, 0, 20, 62, "Newpix " + newpix);
+	img.stringFT(green, font, 20, 0, 350, 62, "Reconnect in: 0:" + countdownh + ":" + countdownm);
+    
+    
     img.savePng('./temp');
     var dat = fs.readFileSync('./temp');
     
