@@ -1,4 +1,4 @@
-
+var path = require('path');
 var gd = require('node-gd');
 var fs = require('fs');
 
@@ -6,7 +6,7 @@ var fonts = './font/';
 
 exports.clock = function(req, res, next) {
     var img = gd.createTrueColor(800, 100);
-    var font = font = 'DigitalDream.ttf';
+    var font = path.join(fonts, 'DigitalDream.ttf');
     
     img.alphaBlending(1);
 	img.setAntiAliased(1);
