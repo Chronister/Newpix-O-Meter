@@ -158,7 +158,7 @@ function makeClockFace(img, offsetx, offsety, radius, length1, length2, color, n
 }
 
 function makeClockHand(img, offsetx, offsety, angle, length, thick) {
-    var black = img.colorallocate(0, 0, 0),
+    var black = img.colorAllocate(0, 0, 0),
         x = offsetx + -length * Math.cos(angle),
         y = offsety + -length * Math.sin(angle),
 
