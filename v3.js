@@ -103,33 +103,33 @@ exports.clock = function(req, res, next) {
 	clock.copyMerge(img, 0, 0, 0, 0, 100, 100, 100);
 	
 	for (i = 0; i < 50; i++) {
-		x1 = 50 + 30 * Math.cos(((i / 50) * 2 * Math.PI + (Math.PI * 0.5)));
-		y1 = 51 + 30 * Math.sin(((i / 50) * 2 * Math.PI + (Math.PI * 0.5)));
-		x2 = 50 + 33 * Math.cos(((i / 50) * 2 * Math.PI + (Math.PI * 0.5)));
-		y2 = 51 + 33 * Math.sin(((i / 50) * 2 * Math.PI + (Math.PI * 0.5)));
+		x1 = Math.floor(50 + 30 * Math.cos(((i / 50) * 2 * Math.PI + (Math.PI * 0.5))));
+		y1 = Math.floor(51 + 30 * Math.sin(((i / 50) * 2 * Math.PI + (Math.PI * 0.5))));
+		x2 = Math.floor(50 + 33 * Math.cos(((i / 50) * 2 * Math.PI + (Math.PI * 0.5))));
+		y2 = Math.floor(51 + 33 * Math.sin(((i / 50) * 2 * Math.PI + (Math.PI * 0.5))));
 	
 	img.line(x1, y1, x2, y2, dark, 1);
 	}
 	
 	for (i = 0; i < 10; i++) {
-		x1 = 50 + 28 * Math.cos(((i / 10) * 2 * Math.PI + (Math.PI * 0.5)));
-		y1 = 51 + 28 * Math.sin(((i / 10) * 2 * Math.PI + (Math.PI * 0.5)));
-		x2 = 50 + 33 * Math.cos(((i / 10) * 2 * Math.PI + (Math.PI * 0.5)));
-		y2 = 51 + 33 * Math.sin(((i / 10) * 2 * Math.PI + (Math.PI * 0.5)));
+		x1 = Math.floor(50 + 28 * Math.cos(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
+		y1 = Math.floor(51 + 28 * Math.sin(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
+		x2 = Math.floor(50 + 33 * Math.cos(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
+		y2 = Math.floor(51 + 33 * Math.sin(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
 	img.setThickness(2);
 	img.line(x1, y1, x2, y2, black, 2);
 	}
     img.setThickness(2);
 	img.line(50, 18, 50, 33, black, 2);
 	
-	x = 50 + -25 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2);
-	y = 52 + -25 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2);
+	x = Math.floor(50 + -25 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
+	y = Math.floor(52 + -25 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
 		
-	x2 = 50 + -16 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2);
-	y2 = 52 + -16 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2);
+	x2 = Math.floor(50 + -16 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
+	y2 = Math.floor(52 + -16 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
 	
-	x3 = 50 + -9 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2);
-	y3 = 52 + -9 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2);
+	x3 = Math.floor(50 + -9 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
+	y3 = Math.floor(52 + -9 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
 		
 	imagelinethick(img, 50, 52 , x, y, black, 2);
 	imagelinethick(img, 50, 52 , x2, y2, black, 3);
