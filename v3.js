@@ -139,8 +139,8 @@ exports.clock = function(req, res, next) {
 	img.line(50, 52 , x3, y3, black);
     
     //Save to a file and then read it back because pngPtr() doesn't work for some reason
-    img.savePng('./temp2');
-    var dat = fs.readFileSync('./temp2');
+    img.savePng('./temp3');
+    var dat = fs.readFileSync('./temp3');
         
     res.set('Content-Type', 'image/png');
     res.end(dat, 'binary');

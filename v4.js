@@ -37,8 +37,8 @@ exports.clock = function(req, res, next) {
 	img.stringFT(green, font, 20, 0, 350, 62, "Reconnect in: 0:" + countdownh + ":" + countdownm);
     
     
-    img.savePng('./temp');
-    var dat = fs.readFileSync('./temp');
+    img.savePng('./temp4');
+    var dat = fs.readFileSync('./temp4');
     
     res.set('Content-Type', 'image/png');
     res.end(dat, 'binary');

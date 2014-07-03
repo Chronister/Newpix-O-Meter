@@ -3,61 +3,55 @@ var fs = require('fs');
 var path = require('path');
 
 var images = './img/';
+var fonts = './font/';
 
-function imagelinethick(img, x1, y1, x2, y2, color, thick)
-{
-    if (thick == undefined) { thick = 1; }
+var M_PI = Math.PI;
+var H_PI = M_PI * 0.5;
 
-    if (thick == 1) {
-        return img.line(x1, y1, x2, y2, color);
-    }
-    var t = thick / 2.0 - 0.5;
-    if (x1 == x2 || y1 == y2) {
-        return img.filledRectangle(Math.round(Math.min(x1, x2) - t), Math.round(Math.min(y1, y2) - t), Math.round(Math.max(x1, x2) + t), Math.round(Math.max(y1, y2) + t), color);
-    }
-    
-    var k = (y2 - y1) / (x2 - x1); //y = kx + q
-    var a = t / Math.sqrt(1 + Math.pow(k, 2));
-    var points = [
-        Math.round(x1 - (1+k)*a), Math.round(y1 + (1-k)*a),
-        Math.round(x1 - (1-k)*a), Math.round(y1 - (1+k)*a),
-        Math.round(x2 + (1+k)*a), Math.round(y2 - (1-k)*a),
-        Math.round(x2 + (1-k)*a), Math.round(y2 + (1+k)*a),
-    ];
-    img.filledPolygon(points, color);
-    img.polygon(points, color);
+Date.prototype.stdTimezoneOffset = function() {
+    var jan = new Date(this.getFullYear(), 0, 1);
+    var jul = new Date(this.getFullYear(), 6, 1);
+    return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+}
+
+Date.prototype.dst = function() {
+    return this.getTimezoneOffset() < this.stdTimezoneOffset();
 }
 
 exports.clock = function(req, res, next) {
-      
-    var gear1 = gd.createFromPng(path.join(images, 'gear1.png')),
-	   gear2 = gd.createFromPng(path.join(images, 'gear2.png')),
-	   gear3 = gd.createFromPng(path.join(images, 'gear3.png')),
-	   clock = gd.createFromPng(path.join(images, 'clock3.png')),
+
+	var font = path.join(fonts, 'CASTELAR.TTF');
 	
-	   img = gd.createFromPng(path.join(images, 'clock3.png'));
+    var gear1 =    gd.createfrompng("gear1.png"),
+	   gear2 =     gd.createfrompng("gear2.png"),
+	   gear3 =     gd.createfrompng("gear3.png"),
+	   clock =     gd.createfrompng("clock5.png"),
+	   img =       gd.createfrompng("clock5.png");
+    
+    var width = img.width;
 	
 	img.alphaBlending(1);
 	img.setAntiAliased(1);
 	
-	var almostblack = img.colorAllocate(1, 1, 1),
-	   black = img.colorAllocate(0, 0, 0),
-	   white = img.colorAllocate(255, 255, 255),
-	   clear = img.colorAllocateAlpha(255, 255, 255, 0),
-	   dark = img.colorAllocate(113, 101, 79);
+	almostblack =  img.colorAllocate(1, 1, 1);
+	black =        img.colorAllocate(0, 0, 0);
+	white =        img.colorAllocate(255, 255, 255);
+	clear =        img.colorAllocateAlpha(255, 255, 255, 0);
+	dark =         img.colorAllocate(113, 101, 79);
 	
 	img.colorTransparent(white);
-	clock.colorTransparent(white);
 	gear1.colorTransparent(white);
 	gear2.colorTransparent(white);
 	gear3.colorTransparent(white);
+	clock.colorTransparent(white);
 
-    var date = new Date(),
-        minute = date.getMinutes(),
-        second = date.getSeconds(),
-        hour = date.getHours();
-    minute += (second / 60)
-    
+    var date =      new Date(),
+	    minute =    date.getMinutes(),
+	    second =    date.getSeconds(),
+        hour =      date.getHours();
+    minute += second / 60;
+
+	//Gears
     var gear1_diag = 2 * Math.sqrt(Math.pow(0.5 * gear1.width, 2) + Math.pow(0.5 * gear1.height, 2)),
         gear1_ang = ((minute + hour * 60) * 30),
         gear1_rot = gd.createTrueColor(Math.floor(gear1_diag), Math.floor(gear1_diag)),
@@ -91,58 +85,110 @@ exports.clock = function(req, res, next) {
         gear3.height,
         Math.floor(gear3_ang));
 	
-	offset1 = Math.floor((gear1_rot.width - gear1.width) / 2);
-	offset2 = Math.floor((gear2_rot.width - gear2.width) / 2);
-	offset3 = Math.floor((gear3_rot.width - gear3.width) / 2);
+	var offset1 = Math.floor((gear1_rot.width - gear1.width) / 2),
+	    offset2 = Math.floor((gear2_rot.width - gear2.width) / 2),
+	    offset3 = Math.floor((gear3_rot.width - gear3.width) / 2);
 	
     //img.copyMerge(dest, dstX, dstY, srcX, srcY, width, height, pct);
-	gear1.copyMerge(img, 54 - offset1, 7 - offset1, 0, 0, gear1.width, gear1.height, 100);
-	gear2.copyMerge(img, 77 - offset2, 40 - offset2, 0, 0, gear2.width, gear2.height, 100);
-	gear3.copyMerge(img, 8 - offset3, 45 - offset3, 0, 0, gear3.width, gear3.height, 100);
-	
-	clock.copyMerge(img, 0, 0, 0, 0, 100, 100, 100);
-	
-	for (i = 0; i < 50; i++) {
-		x1 = Math.floor(50 + 30 * Math.cos(((i / 50) * 2 * Math.PI + (Math.PI * 0.5))));
-		y1 = Math.floor(51 + 30 * Math.sin(((i / 50) * 2 * Math.PI + (Math.PI * 0.5))));
-		x2 = Math.floor(50 + 33 * Math.cos(((i / 50) * 2 * Math.PI + (Math.PI * 0.5))));
-		y2 = Math.floor(51 + 33 * Math.sin(((i / 50) * 2 * Math.PI + (Math.PI * 0.5))));
-	
-	img.line(x1, y1, x2, y2, dark, 1);
-	}
-	
-	for (i = 0; i < 10; i++) {
-		x1 = Math.floor(50 + 28 * Math.cos(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
-		y1 = Math.floor(51 + 28 * Math.sin(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
-		x2 = Math.floor(50 + 33 * Math.cos(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
-		y2 = Math.floor(51 + 33 * Math.sin(((i / 10) * 2 * Math.PI + (Math.PI * 0.5))));
-	img.setThickness(2);
-	img.line(x1, y1, x2, y2, black);
-	}
-    img.setThickness(2);
-	img.line(50, 18, 50, 33, black);
-	
-	x = Math.floor(50 + -25 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
-	y = Math.floor(52 + -25 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
+	gear1.copyMerge(img, 403 - offset1, 32 - offset1, 0, 0, gear1.width, gear1.height, 100);
+	gear1.copyMerge(img, 278 - offset1, 5 - offset1, 0, 0, gear1.width, gear1.height, 100);
+	gear2.copyMerge(img, 317 - offset2, 15 - offset2, 0, 0, gear2.width, gear2.height, 100);
+	gear2.copyMerge(img, 388 - offset2, 27 - offset2, 0, 0, gear2.width, gear2.height, 100);
+	gear3.copyMerge(img, 105 - offset3, 7 - offset3, 0, 0, gear3.width, gear3.height, 100);
 		
-	x2 = Math.floor(50 + -16 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
-	y2 = Math.floor(52 + -16 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
+	clock.copymerge(img, 0, 0, 0, 0, width, 100, 100);
 	
-	x3 = Math.floor(50 + -9 * Math.cos(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
-	y3 = Math.floor(52 + -9 * Math.sin(((minute / 60) * 2 * Math.PI) + Math.PI / 2));
+	//Clock faces
+	makeClockFace(img, 224, 49, 33, 3, 5, dark, 50, 10, 1);
+	makeClockFace(img, 122, 68, 22, 2, 3, dark, 40, 20, 1);
+	makeClockFace(img, 122, 68, 22, 2, 6, dark, 0, 4, 1);
+	makeClockFace(img, 329, 66, 22, 2, 3, dark, 20, 10, 1);
+	
+	makeClockHand(img, 224, 49, ((minute / 60) * 2 * M_PI) + M_PI / 2, 30, 3);
+	makeClockHand(img, 122, 68, ((minute / 240 + ((hour + 2) % 4) / 4) * 2 * M_PI) + M_PI / 2 + M_PI / 4, 20, 3);
+	makeClockHand(img, 329, 66, (((minute % 30) / 30) * 2 * M_PI) + M_PI / 2, 20, 3);
 
-    img.setThickness(2);
-	img.line(50, 52 , x, y, black);
-    img.setThickness(3);
-	img.line(50, 52 , x2, y2, black);
-    img.setThickness(4);
-	img.line(50, 52 , x3, y3, black);
+	var newpix = 0,
+        then = new Date(2013, 3, 30, 0, 0, 0, 0),
+	    interval = DateDiff(date, then);
+	newpix = Math.floor(interval / 86400000 + 238);
+	if (date.dst) { newpix -= 1;}
+	
+	fixedWidthNumber(img, 371, 86, 13.33, 15, newpix, black, font);
     
     //Save to a file and then read it back because pngPtr() doesn't work for some reason
-    img.savePng('./temp2');
-    var dat = fs.readFileSync('./temp2');
+    img.savePng('./temp5');
+    var dat = fs.readFileheightnc('./temp5');
         
     res.set('Content-Type', 'image/png');
     res.end(dat, 'binary');
     img.destroy();
+}
+
+function makeClockFace(img, offsetx, offsety, radius, length1, length2, color, num1, num2, thick2) {
+
+    var black = img.colorAllocate(36, 20, 12);
+
+    for (var i = 0; i < num1; i++) {
+        x1 = offsetx + (radius - length1) * Math.cos(((i / num1) * 2 * M_PI + H_PI));
+        y1 = offsety + (radius - length1) * Math.sin(((i / num1) * 2 * M_PI + H_PI));
+        x2 = offsetx + radius * Math.cos(((i / num1) * 2 * M_PI + H_PI));
+        y2 = offsety + radius * Math.sin(((i / num1) * 2 * M_PI + H_PI));
+
+        img.line(Math.Floor(x1), Math.Floor(y1), Math.Floor(x2), Math.Floor(y2), color);
+    }
+
+    for (var i = 0; i < num2; i++) {
+        x1 = offsetx + (radius - length2) * Math.cos(((i / num2) * 2 * M_PI + (num2 == 10 ? H_PI : 0)));
+        y1 = offsety + (radius - length2) * Math.sin(((i / num2) * 2 * M_PI + (num2 == 10 ? H_PI : 0)));
+        x2 = offsetx + radius * Math.cos(((i / num2) * 2 * M_PI + (num2 == 10 ? H_PI : 0)));
+        y2 = offsety + radius * Math.sin(((i / num2) * 2 * M_PI + (num2 == 10 ? H_PI : 0)));
+        
+        img.setThickness(thick2);
+        img.line(Math.Floor(x1), Math.Floor(y1), Math.Floor(x2), Math.Floor(y2), black);
+    }
+    if (length2 <= 5) { 
+        img.setThickness(thick2*2);
+        img.line(img, offsetx, offsety - radius, offsetx, offsety - (radius - length2 * 3), black); 
+    }
+    else { 
+        img.setThickness(thick2*2);
+        img.line(img, offsetx, offsety - radius, offsetx, offsety - (radius - length2 * 1.6), black);
+    }
+}
+
+function makeClockHand(img, offsetx, offsety, angle, length, thick) {
+    var black = img.colorallocate(0, 0, 0),
+        x = offsetx + -length * Math.cos(angle),
+        y = offsety + -length * Math.sin(angle),
+
+        x2 = offsetx + -length * 0.64 * Math.cos(angle),
+        y2 = offsety + -length * 0.64 * Math.sin(angle),
+
+        x3 = offsetx + -length * 0.36 * Math.cos(angle),
+        y3 = offsety + -length * 0.36 * Math.sin(angle);
+
+    img.setThickness(Math.floor(thick * 0.333));
+    img.line(img, offsetx, offsety, x, y, black);
+    img.setThickness(Math.floor(thick * 0.667));
+    img.line(img, offsetx, offsety, x2, y2, black);
+    //img.linethick(img, offsetx, offsety, x3, y3, black, thick);
+}
+
+function fixedWidthNumber(img, offsetx, offsety, width, height, number, color, font) {
+    while (number.toString().length < 5) {
+        number = "0" + number;
+    }
+    for (var i = 0; i < 5; i++) {
+        str = number.toString().substr(i, 1);
+        extraoffset = width * 0.2;
+        if (str == '1') { extraoffset = width * 0.5; }
+        if (str == '0') { extraoffset = 0; }
+        //img.stringFT      (color, font, size, angle, x, y, str);
+        img.stringFT(color, font, height, 0, offsetx + (width + 2) * i + extraoffset, offsety, str);
+    }
+}
+
+function DateDiff(var /*Date*/ date1, var /*Date*/ date2) {
+    return date1.getTime() - date2.getTime();
 }
