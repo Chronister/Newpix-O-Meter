@@ -94,7 +94,7 @@ exports.clock = function(req, res, next) {
 	gear1.copyMerge(img, 278 - offset1, 5 - offset1, 0, 0, gear1.width, gear1.height, 100);
 	gear2.copyMerge(img, 317 - offset2, 15 - offset2, 0, 0, gear2.width, gear2.height, 100);
 	gear2.copyMerge(img, 388 - offset2, 27 - offset2, 0, 0, gear2.width, gear2.height, 100);
-	gear3.copyMerge(img, 105 - offset3, 7 - offset3, 0, 0, gear3.width, gear3.height, 100);
+	gear3.copyMerge(img, 105 - offset3, 13 - offset3, 0, 0, gear3.width, gear3.height, 100);
 		
 	clock.copyMerge(img, 0, 0, 0, 0, width, 100, 100);
 	
@@ -168,9 +168,9 @@ function makeClockHand(img, offsetx, offsety, angle, length, thick) {
         x3 = offsetx + -length * 0.36 * Math.cos(angle),
         y3 = offsety + -length * 0.36 * Math.sin(angle);
 
-    img.setThickness(Math.floor(thick * 0.333));
+    img.setThickness(Math.round(thick * 0.333));
     img.line(Math.floor(offsetx), Math.floor(offsety), Math.floor(x), Math.floor(y), black);
-    img.setThickness(Math.floor(thick * 0.667));
+    img.setThickness(Math.round(thick * 0.667));
     img.line(Math.floor(offsetx), Math.floor(offsety), Math.floor(x2), Math.floor(y2), black);
     //img.linethick(img, offsetx, offsety, x3, y3, black, thick);
 }
