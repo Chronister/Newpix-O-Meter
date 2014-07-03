@@ -1,5 +1,7 @@
 var express = require('express');
 var path = require("path");
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 3100
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
 var pub = __dirname + '/public';
 // setup middleware
@@ -39,5 +41,6 @@ app.use(function(req, res, next){
   res.type('txt').send('Not found');
 });
 
-app.listen(80);
-console.log('Newpix-O-Meter started on port 80. Node version: ' + process.version);
+app.listen(server_port, server_ip_address, function() { 
+  console.log('Newpix-O-Meter started on ' + server_ip_address + ":" + server_port + '. Node version: ' + process.version);
+});
