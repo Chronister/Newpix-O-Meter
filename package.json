@@ -20,7 +20,7 @@
     "predeploy": "echo Starting the app",
     "postdeploy": "echo App has started"
   },
-  "main": "./index",
+  "main": "index.js",
   "keywords": [
     "clock",
     "http",
