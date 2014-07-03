@@ -189,6 +189,6 @@ function fixedWidthNumber(img, offsetx, offsety, width, height, number, color, f
     }
 }
 
-function DateDiff(var /*Date*/ date1, var /*Date*/ date2) {
+function DateDiff(date1, date2) {
     return date1.getTime() - date2.getTime();
 }
