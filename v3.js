@@ -46,11 +46,11 @@ exports.clock = function(req, res, next) {
 	   clear = img.colorAllocateAlpha(255, 255, 255, 0),
 	   dark = img.colorAllocate(113, 101, 79);
 	
-	img.colorTransparent(img, white);
-	clock.colorTransparent(clock, white);
-	gear1.colorTransparent(gear1, white);
-	gear2.colorTransparent(gear2, white);
-	gear3.colorTransparent(gear3, white);
+	img.colorTransparent(white);
+	clock.colorTransparent(white);
+	gear1.colorTransparent(white);
+	gear2.colorTransparent(white);
+	gear3.colorTransparent(white);
 
     var date = new Date(),
         minute = date.getMinutes(),
