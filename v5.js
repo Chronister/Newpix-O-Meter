@@ -108,11 +108,7 @@ exports.clock = function(req, res, next) {
 	makeClockHand(img, 122, 68, ((minute / 240 + ((hour + 2) % 4) / 4) * 2 * M_PI) + M_PI / 2 + M_PI / 4, 20, 3);
 	makeClockHand(img, 329, 66, (((minute % 30) / 30) * 2 * M_PI) + M_PI / 2, 20, 3);
 
-	var newpix = 0,
-        then = new Date(2013, 3, 30, 0, 0, 0, 0),
-	    interval = DateDiff(date, then);
-	newpix = Math.floor(interval / 3600000 + 238);
-	if (date.dst) { newpix -= 1;}
+	var newpix = unixToNewpix(date.getTime());
 	
 	fixedWidthNumber(img, 371, 86, 13.33, 15, newpix, black, font);
     
@@ -191,4 +187,32 @@ function fixedWidthNumber(img, offsetx, offsety, width, height, number, color, f
 
 function DateDiff(date1, date2) {
     return date1.getTime() - date2.getTime();
+}
+
+// Convert from UNIX epoch to Universal Newpix Time.                             
+function unixToNewpix(time)
+{
+  var heret = time,
+      np;
+
+  // When np == 240:                                                             
+  // hr = 1364182200 + (240 * 1800) + (0)                                       
+  //    = 1363750200 - (240 * 1800) + (240 * 3600)                             
+  //    = 1364614200                                                           
+  if (heret > 1364616000) {
+    // When np > 241:                                                           
+    // $hr = 1364182200 + ($np * 1800) + (($np-241) * 1800)                     
+    //     = 1364182200 + ($np * 1800) + ($np * 1800) - (241 * 1800)             
+    //     = 1363748400 + ($np * 3600)                                           
+    np = (heret - 1363748400) / 3600;
+  } else {
+    // When np <= 240:                                                           
+    // $hr = 1364182200 + ($np * 1800) + (0)                                     
+    np = (heret - 1364182200) / 1800;
+    // Produce discontinuity at (-1..1) because "there is no year 0"             
+    if (np < 1.0) {
+      np -= 2.0;
+    }
+  }
+  return np;
 }
