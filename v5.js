@@ -111,7 +111,7 @@ exports.clock = function(req, res, next) {
 	var newpix = 0,
         then = new Date(2013, 3, 30, 0, 0, 0, 0),
 	    interval = DateDiff(date, then);
-	newpix = Math.floor(interval / 86400000 + 238);
+	newpix = Math.floor(interval / 3600000 + 238);
 	if (date.dst) { newpix -= 1;}
 	
 	fixedWidthNumber(img, 371, 86, 13.33, 15, newpix, black, font);
