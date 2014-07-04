@@ -94,7 +94,7 @@ exports.clock = function(req, res, next) {
 	gear1.copyMerge(img, 278 - offset1, 5 - offset1, 0, 0, gear1.width, gear1.height, 100);
 	gear2.copyMerge(img, 317 - offset2, 15 - offset2, 0, 0, gear2.width, gear2.height, 100);
 	gear2.copyMerge(img, 388 - offset2, 27 - offset2, 0, 0, gear2.width, gear2.height, 100);
-	gear3.copyMerge(img, 105 - offset3, 13 - offset3, 0, 0, gear3.width, gear3.height, 100);
+	gear3.copyMerge(img, 113 - offset3, 13 - offset3, 0, 0, gear3.width, gear3.height, 100);
 		
 	clock.copyMerge(img, 0, 0, 0, 0, width, 100, 100);
 	
