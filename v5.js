@@ -108,7 +108,7 @@ exports.clock = function(req, res, next) {
 	makeClockHand(img, 122, 68, ((minute / 240 + ((hour + 2) % 4) / 4) * 2 * M_PI) + M_PI / 2 + M_PI / 4, 20, 3);
 	makeClockHand(img, 329, 66, (((minute % 30) / 30) * 2 * M_PI) + M_PI / 2, 20, 3);
 
-	var newpix = unixToNewpix(date.getTime());
+	var newpix = unixToNewpix(date.getTime() / 1000);
 	
 	fixedWidthNumber(img, 371, 86, 13.33, 15, newpix, black, font);
     
@@ -190,9 +190,9 @@ function DateDiff(date1, date2) {
 }
 
 // Convert from UNIX epoch to Universal Newpix Time.                             
-function unixToNewpix(time)
+function unixToNewpix(secondsSinceUnix)
 {
-  var heret = time,
+  var heret = secondsSinceUnix,
       np;
 
   // When np == 240:                                                             
